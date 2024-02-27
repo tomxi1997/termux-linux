@@ -4,17 +4,18 @@ arch=""
 #linux="archlinux";
 #linux_ver="";
 qemu_command=""
-proot_command="proot"
+#proot_command="proot"
+proot_command="$(pwd)/proot"
 
 if [ ! -d ~/storage ] && [ -x "termux-setup-storage" ]; then
 	termux-setup-storage
 fi
-if [ -x "$(command -v apt)" ]; then
-	if [ ! -x "$(command -v proot)" ] || [ ! -x "$(command -v wget)" ] || [ ! -x "$(command -v tar)" ]; then
-		apt update && apt upgrade -y &&
-			apt install -y tar proot wget
-	fi
-fi
+#if [ -x "$(command -v apt)" ]; then
+	#if [ ! -x "$(command -v proot)" ] || [ ! -x "$(command -v wget)" ] || [ ! -x "$(command -v tar)" ]; then
+		#apt update && apt upgrade -y &&
+			#apt install -y tar proot wget
+	#fi
+#fi
 
 case $(uname -m) in
 aarch64)
@@ -35,13 +36,13 @@ x86_64)
 	;;
 esac
 
-if [ ! -x "$(command -v proot)" ]; then
-	curl -o proot https://ghproxy.com/https://github.com/proot-me/proot/releases/download/v5.3.0/proot-v5.3.0-${arch}-static
-	chmod 755 proot
-	proot_command="$(pwd)/proot"
-        echo "使用静态 proot 文件."
+#if [ ! -x "$(command -v proot)" ]; then
+	#curl -o proot https://ghproxy.com/https://github.com/proot-me/proot/releases/download/v5.3.0/proot-v5.3.0-${arch}-static
+	#chmod 755 proot
+	#proot_command="$(pwd)/proot"
+       # echo "使用静态 proot 文件."
 
-fi
+#fi
 
 echo "********************************"
 echo "   请选择安装的系统架构   "
